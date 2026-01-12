@@ -33,7 +33,7 @@ jobs:
 
       - name: 'first_test'
         if: "github.event.inputs.deployment_target == 'first_test'"
-        run: pytest ./main.py::test_wiki1 -s -v
+        run: pytest ./test_main.py::test_wiki1 -s -v
       - name: 'second_test'
         if: "github.event.inputs.deployment_target == 'second_test'"
-        run: pytest ./main.py::test_wiki2 -s -v
+        run: pytest ./test_main.py::test_wiki2 -s -v
