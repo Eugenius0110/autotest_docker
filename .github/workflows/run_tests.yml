@@ -1,0 +1,25 @@
+name: Automated tests
+
+on: # если, в какой ситуации
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4 # готовый action
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+        #run: sudo apt-get isntall google-chrome-stable
+      - name: Install playwright chrome
+        run: playwright install --with-deps chromium
+      - name: Run tests
+        run: pytest
