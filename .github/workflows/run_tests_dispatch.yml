@@ -1,4 +1,4 @@
-name: 'Automated tests'
+name: 'Automated tests workflow_dispatch'
 
 on: # если, в какой ситуации
   workflow_dispatch: # запускать в ручном режиме
@@ -6,7 +6,7 @@ on: # если, в какой ситуации
       deployment_target:
         description: 'Choose target'
         required: true
-        default:
+        default: first_test
         type: choice
         options:
           - first_test
