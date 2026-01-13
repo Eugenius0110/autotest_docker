@@ -7,27 +7,28 @@ from logging import getLogger, basicConfig, DEBUG, ERROR, CRITICAL, INFO, FileHa
 
 from playwright.sync_api import Page, expect, sync_playwright
 
+
+
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
 log_file = os.path.join(log_dir, 'data.log')
 
-
 logger = getLogger(__name__)
 logger.setLevel(DEBUG)
-
-formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-file_handler = FileHandler(log_file, mode='w')
+FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+file_handler = FileHandler(log_file, mode='w', encoding='utf-8')
 file_handler.setLevel(DEBUG)
-file_handler.setFormatter(formatter)
+file_handler.setFormatter(Formatter(FORMAT))
 
 console = StreamHandler()
 console.setLevel(CRITICAL)
-console.setFormatter(formatter)
+console.setFormatter(Formatter(FORMAT))
 
-if not logger.handlers:
-    logger.addHandler(file_handler)
-    logger.addHandler(console)
+if logger.handlers:
+    logger.handlers.clear()
+
+logger.addHandler(file_handler)
+logger.addHandler(console)
 
 
 @allure.title("Test 1")
@@ -41,7 +42,7 @@ def test_wiki1(page):
     logger.info("Check that text is visible")
     expect(page.get_by_text('Добро пожаловать в Википедию')).to_be_visible()
     logger.debug("Test 1 is done")
-    logger.critical("INFO CRITICAL")
+    logger.critical("INFO CRITICAL MESSAGE")
 
 @allure.title("Test 2")
 def test_wiki2(page: Page):
@@ -54,7 +55,7 @@ def test_wiki2(page: Page):
     logger.info("Contain text")
     expect(page.locator(".main-top-header.mw-html-heading")).to_contain_text("Добро пожаловать в")
     logger.debug("Test 2 is done")
-    logger.critical("INFO CRITICAL")
+    logger.critical("INFO CRITICAL MESSAGE")
 
 @allure.title("Test 3")
 def test_wiki3(page: Page):
@@ -69,4 +70,4 @@ def test_wiki3(page: Page):
     logger.info("Contain text")
     expect(page.locator(".firstHeading.mw-first-heading")).to_contain_text("Википедия")
     logger.debug("Test 3 is done")
-    logger.critical("INFO CRITICAL")
+    logger.critical("INFO CRITICAL MESSAGE")
