@@ -1,4 +1,4 @@
-name: 'Automated tests workflow_dispatch'
+name: Automated tests workflow_dispatch
 
 on: # если, в какой ситуации
   workflow_dispatch: # запускать в ручном режиме
