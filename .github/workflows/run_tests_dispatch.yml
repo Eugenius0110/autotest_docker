@@ -14,7 +14,7 @@ on: # если, в какой ситуации
 
 
 permissions: # права
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
