@@ -98,7 +98,7 @@ jobs:
         run: pytest ./test_main.py::test_wiki2 -s -v --alluredir=allure-results
 
       - name: 'Save allure results'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3 # (409) Conflict: an artifact with this name already exists on the workflow run
         with:
           name: allure-results
           path: allure-results
