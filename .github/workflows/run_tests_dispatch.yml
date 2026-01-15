@@ -75,6 +75,16 @@ jobs:
 
       - name: 'Download history'
         uses: actions/download-artifact@v4
+      - name: 'Debug - Show downloaded file'
+        run: |
+                  echo "Current directory: $(pwd)"
+                  echo "Files:" ls -la
+                  echo "File size: $(wc -c < allure-results.zip)"
+                  echo "First 100 chars:"
+                  head -c 100 allure-results.zip | cat -A
+                  echo -e "\nFile type:"
+                  file allure-results.zip || true
+        
 
       - name: 'first_test'
         if: "github.event.inputs.deployment_target == 'first_test'"
