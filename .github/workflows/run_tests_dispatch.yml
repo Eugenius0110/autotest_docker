@@ -41,19 +41,19 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          "https://api.github.com/repos/kotov-e/autotest_docker/actions/artifacts/$ARTIFACT_ID/zip" -o allure-results.zip
+          "https://api.github.com/repos/kotov-e/autotest_docker/actions/artifacts/$ARTIFACT_ID/zip" -o artifact.zip
 
       - name: 'Debug - Show downloaded file'
         run: |    
           echo "Artifact ID: $ARTIFACT_ID"
           echo "Current directory: $(pwd)"
           echo "Files: $(ls -la)" 
-          echo "File size: $(wc -c < allure-results.zip)"
+          echo "File size: $(wc -c < artifact.zip)"
           echo "File content:" 
-          cat allure-results.zip
+          cat artifact.zip
                             
 
-      - run:  mkdir allure-results && unzip allure-results.zip -d allure-results
+      - run:  mkdir allure-results && unzip artifact.zip -d allure-results
 
       - name: 'Store allure history'
         uses: actions/upload-artifact@v4
