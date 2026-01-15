@@ -43,7 +43,8 @@ jobs:
           "https://api.github.com/repos/kotov-e/autotest_docker/actions/artifacts/$ARTIFACT_ID/zip" -o allure-results.zip
 
       - name: 'Debug - Show downloaded file'
-        run: |
+        run: |    
+                  echo "ARTIFACT_ID: $ARTIFACT_ID"
                   echo "Current directory: $(pwd)"
                   echo "Files: $(ls -la)" 
                   echo "File size: $(wc -c < allure-results.zip)"
