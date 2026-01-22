@@ -136,9 +136,9 @@ jobs:
         description: 'Send message to telegram if tests passed'
         if: needs.first_test.outputs == 'success'
         run: |
-            curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage"
+            curl --location 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type: application/json' --data '{ "chat_id": 1293461593, "text": "Test passed. Report is available at https://kotov-e.github.io/autotest_docker/" }'
       - name: 'Failure'
         description: 'Send message to telegram if tests failed'
         if: steps.test.status == 'failure'
         run: |
-            curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage"
+            curl --location 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type: application/json' --data '{ "chat_id": 1293461593, "text": "Test failed. Report is available at https://kotov-e.github.io/autotest_docker/" }'
