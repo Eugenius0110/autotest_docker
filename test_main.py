@@ -54,7 +54,7 @@ def test_wiki2(page: Page):
     logger.info("Click on link")
     page.locator("#js-link-box-ru").click()
     logger.info("Contain text")
-    expect(page.locator(".main-top-header.mw-html-heading")).to_contain_text("Добро пожаловать в")
+    expect(page.locator(".main-top-header.mw-html-heading")).to_contain_text("Добро пожаловать в 123") # fail
     logger.debug("Test 2 is done")
     logger.critical("INFO CRITICAL MESSAGE")
 
